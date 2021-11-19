@@ -572,6 +572,7 @@ public class TagsView: UIView {
             if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width - 10 > 0) ) {
                 self.addConstraint(tagArray[index-1].trailingConstraint(
                     self,
+                    relation: .equal,
                     constant: self.marginHorizontal
                 ))
                 width = ceil(element.size.width) + self.marginHorizontal + self.marginHorizontal
@@ -581,11 +582,10 @@ public class TagsView: UIView {
                 self._height += element.size.height + self.marginVertical
             }
             
-            
-            
             self.addConstraint(element.leadingConstraint (
                 leftItem ?? self,
                 attribute: leftItem == nil ? .leading : .trailing,
+                relation: leftItem == nil ? (element == tagArray.first ? .equal : .lessThanOrEqual) : .equal,
                 constant: self.marginHorizontal
             ))
             self.addConstraint(element.topConstraint (
@@ -600,6 +600,7 @@ public class TagsView: UIView {
                 ))
                 self.addConstraint(element.trailingConstraint(
                     self,
+                    relation: .equal,
                     constant: self.marginHorizontal
                 ))
             }

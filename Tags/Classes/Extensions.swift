@@ -21,11 +21,11 @@
 import UIKit
 
 extension UIView {
-    func leadingConstraint(_ item: UIView, attribute: NSLayoutConstraint.Attribute, constant: CGFloat) -> NSLayoutConstraint {
+    func leadingConstraint(_ item: UIView, attribute: NSLayoutConstraint.Attribute, relation: NSLayoutConstraint.Relation = .equal, constant: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
             item: item,
             attribute: attribute,
-            relatedBy: .equal,
+            relatedBy: relation,
             toItem: self,
             attribute: .leading,
             multiplier: 1,
@@ -33,11 +33,11 @@ extension UIView {
         )
     }
     
-    func trailingConstraint(_ item: UIView, constant: CGFloat) -> NSLayoutConstraint {
+    func trailingConstraint(_ item: UIView, relation: NSLayoutConstraint.Relation = .greaterThanOrEqual, constant: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
             item: item,
             attribute: .trailing,
-            relatedBy: .greaterThanOrEqual,
+            relatedBy: relation,
             toItem: self,
             attribute: .trailing,
             multiplier: 1,
