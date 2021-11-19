@@ -32,6 +32,7 @@ public struct ButtonOptions {
     public var tagTitleColor: UIColor
     public var tagFont: UIFont
     public var tagBackgroundColor: UIColor
+    public var tagWidth: CGFloat?
     public var lineBreakMode: NSLineBreakMode
     
     init(
@@ -43,6 +44,7 @@ public struct ButtonOptions {
         tagTitleColor: UIColor = TagDefaultOption.tagTitleColor,
         tagFont: UIFont = TagDefaultOption.tagFont,
         tagBackgroundColor: UIColor = TagDefaultOption.tagBackgroundColor,
+        tagWidth: CGFloat? = nil,
         lineBreakMode: NSLineBreakMode = TagDefaultOption.lineBreakMode) {
         self.paddingHorizontal = paddingHorizontal
         self.paddingVertical = paddingVertical
@@ -52,6 +54,7 @@ public struct ButtonOptions {
         self.tagTitleColor = tagTitleColor
         self.tagFont = tagFont
         self.tagBackgroundColor = tagBackgroundColor
+        self.tagWidth = tagWidth
         self.lineBreakMode = lineBreakMode
     }
     
@@ -62,6 +65,7 @@ public struct ButtonOptions {
         tagTitleColor: UIColor = TagDefaultOption.tagTitleColor,
         tagFont: UIFont = TagDefaultOption.tagFont,
         tagBackgroundColor: UIColor = TagDefaultOption.tagBackgroundColor,
+        tagWidth: CGFloat? = nil,
         lineBreakMode: NSLineBreakMode = TagDefaultOption.lineBreakMode) {
         self.layerColor = layerColor
         self.layerRadius = layerRadius
@@ -69,6 +73,7 @@ public struct ButtonOptions {
         self.tagTitleColor = tagTitleColor
         self.tagFont = tagFont
         self.tagBackgroundColor = tagBackgroundColor
+        self.tagWidth = tagWidth
         self.lineBreakMode = lineBreakMode
     }
 }
@@ -92,18 +97,25 @@ public class TagButton: UIButton {
     public var index: Int = 0
     public var key: Int = 0
     public var keyString: String = ""
+    public var fixedWidth: CGFloat?
     
     var type: TagButtonType = .default
     
     /// button Size
     var size: CGSize {
         var size = self.titleLabel?.attributedText?.size() ?? .zero
-        size.width = ceil(size.width)
         size.height = ceil(size.height)
-        size.width += self.contentEdgeInsets.left + self.contentEdgeInsets.right
         size.height += self.contentEdgeInsets.top + self.contentEdgeInsets.bottom
-        size.width += 4
         size.height += 4
+        
+        if let fixedWidth = self.fixedWidth {
+            size.width = fixedWidth
+        } else {
+            size.width = ceil(size.width)
+            size.width += self.contentEdgeInsets.left + self.contentEdgeInsets.right
+            size.width += 4
+        }
+        
         return size
     }
     
@@ -124,6 +136,7 @@ public class TagButton: UIButton {
         self.setTitleColor(options.tagTitleColor, for: .normal)
         self.titleLabel?.font = options.tagFont
         self.backgroundColor = options.tagBackgroundColor
+        self.fixedWidth = options.tagWidth
         self.titleLabel?.lineBreakMode = options.lineBreakMode
     }
     
