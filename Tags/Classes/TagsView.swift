@@ -97,12 +97,6 @@ public class TagsView: UIView {
         if self.width == 0 {
             self.width = currentWidth
         }
-        
-        DispatchQueue.main.async {
-            if self.width == 0 || (self.width != 0 && self.frame.width != currentWidth) {
-                self.width = self.frame.width
-            }
-        }
     }
     
     public override init(frame: CGRect) {
@@ -133,12 +127,6 @@ public class TagsView: UIView {
         let currentWidth = self.frame.width
         if self.width == 0 {
             self.width = currentWidth
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.layoutIfNeeded()
-            if self.width == 0 || (self.width != 0 && self.frame.width != currentWidth) {
-                self.width = self.frame.width
-            }
         }
     }
     
