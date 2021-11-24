@@ -80,7 +80,7 @@ public struct ButtonOptions {
 
 
 
-protocol TagButtonDelegate: class {
+protocol TagButtonDelegate: AnyObject {
     /// When you touch the button, the function is called.
     func tagButtonAction(_ tagButton: TagButton, type: TagButtonType)
 }
