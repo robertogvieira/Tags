@@ -66,7 +66,7 @@ extension UIView {
             attribute: .bottom,
             multiplier: 1,
             constant: constant
-        ).priority(990)
+        )
     }
 }
 

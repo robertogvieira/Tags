@@ -182,8 +182,6 @@ public class TagButton: UIButton {
             attribute: .height,
             multiplier: 1,
             constant: self.size.height)
-        widthConstraint.priority = UILayoutPriority(900)
-        heightConstraint.priority = UILayoutPriority(900)
         self.addConstraints([widthConstraint, heightConstraint])
     }
     
